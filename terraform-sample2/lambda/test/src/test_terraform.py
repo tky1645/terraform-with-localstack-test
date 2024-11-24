@@ -1,4 +1,5 @@
 def handler(event, context):
-    print('test')
-
-    return()
+    return {
+        'statusCode': 200,
+        'body': 'Hello from Lambda!'
+    }

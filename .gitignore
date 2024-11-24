@@ -1,1 +1,4 @@
-terraform-sample2\.terraform\*
+.terraform
+.terraform.lock.hcl
+terraform.tfstate
+terraform.tfstate.backup
