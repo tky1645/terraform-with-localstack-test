@@ -2,7 +2,7 @@
 resource "aws_lambda_function" "ses_email_sender" {
   function_name = "ses_email_sender"
   handler       = "main"
-  runtime       = "go1.x"
+  runtime       = "provided.al2"
   role          = aws_iam_role.lambda_role_for_ses.arn
   filename      = "lambda/ses_email_sender.zip"
   environment {
@@ -69,9 +69,10 @@ resource "aws_iam_role_policy" "lambda_policy_for_ses" {
 resource "aws_lambda_function" "sqs_sender" {
   function_name = "sqs_sender"
   handler       = "main"
-  runtime       = "go1.x"
+  runtime       = "provided.al2"
   role          = aws_iam_role.lambda_role_for_sqs.arn
-  filename      = "lambda/sqs_sender.zip"
+  filename      = "lambda/hoge/sqs/sqs_sender.zip"
+
   environment {
     variables = {
       SQS_QUEUE_URL = aws_sqs_queue.queue.url

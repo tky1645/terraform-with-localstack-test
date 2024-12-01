@@ -2,3 +2,6 @@
 .terraform.lock.hcl
 terraform.tfstate
 terraform.tfstate.backup
+learn-sqs-lambda-sample/lambda/sqs/main
+learn-sqs-lambda-sample/result.log
+learn-sqs-lambda-sample/.terraform.tfstate.lock.info

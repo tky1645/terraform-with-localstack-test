@@ -26,3 +26,10 @@ pluralith graph
  terraform graph | dot -Tpng > graph.png
 ---
 aws --endpoint-url=http://localhost:4566 sqs create-queue --queue-name テストキュー --region us-west-2
+
+# デプロイパッケージを作成
+GOOS=linux GOARCH=amd64 go build -o main
+zip -r ./.aws/lamda/sqs_sender.zip main
+
+----
+terraform apply -auto-approve
