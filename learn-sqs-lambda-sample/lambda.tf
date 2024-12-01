@@ -1,8 +1,8 @@
 # call from sqs
 resource "aws_lambda_function" "ses_email_sender" {
   function_name = "ses_email_sender"
-  handler       = "index.handler"
-  runtime       = "nodejs18.x"
+  handler       = "main"
+  runtime = "go1.x"
   role          = aws_iam_role.lambda_role_for_ses.arn
   filename      = "lambda/ses_email_sender.zip"
   environment {
@@ -11,6 +11,7 @@ resource "aws_lambda_function" "ses_email_sender" {
     }
   }
 }
+
 # sqsのキック対象のlambdaを指定
 resource "aws_lambda_event_source_mapping" "sqs_mapping" {
   event_source_arn = aws_sqs_queue.queue.arn
@@ -69,7 +70,7 @@ resource "aws_lambda_function" "sqs_sender" {
   function_name = "sqs_sender"
   handler = "main"
   runtime = "go1.x"
-  role = aws_iam_role.lambda_role_for_ses.arn
+  role = aws_iam_role.lambda_role_for_sqs.arn
   filename = "lambda/sqs_sender.zip"
   environment {
     variables = {

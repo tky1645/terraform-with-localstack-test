@@ -1,9 +1,14 @@
 package main
 
-import "github.com/aws/aws-lambda-go/lambda"
+import (
+	"fmt"
+
+	"github.com/aws/aws-lambda-go/lambda"
+)
 
 func HandleRequest() (string, error) {
-	return "Hello from Lambda!", nil
+	for _, message := range sqsEvent.Records {
+		fmt.Println("Message ID: , Evetnt Source", message.MessageId, message.EventSource)
 }
 
 func main() {

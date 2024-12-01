@@ -53,7 +53,7 @@ resource "aws_cloudwatch_event_rule" "every_minute" {
 }
 
 # EventBridgeルールに対するターゲットの作成
-resource "aws_cloudwatch_event_target" "lambda_every_minte" {
+resource "aws_cloudwatch_event_target" "lambda_every_minute" {
   rule = aws_cloudwatch_event_rule.every_minute.name
   target_id = "runLambdaFunction"
   arn = aws_lambda_function.sqs_sender.arn 
