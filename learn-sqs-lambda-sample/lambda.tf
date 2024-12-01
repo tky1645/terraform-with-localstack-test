@@ -2,7 +2,7 @@
 resource "aws_lambda_function" "ses_email_sender" {
   function_name = "ses_email_sender"
   handler       = "main"
-  runtime = "go1.x"
+  runtime       = "go1.x"
   role          = aws_iam_role.lambda_role_for_ses.arn
   filename      = "lambda/ses_email_sender.zip"
   environment {
@@ -32,7 +32,7 @@ resource "aws_iam_role" "lambda_role_for_ses" {
         },
       }
     ]
-  }) 
+  })
 }
 resource "aws_iam_role_policy" "lambda_policy_for_ses" {
   name = "lambda_policy_for_ses"
@@ -68,31 +68,31 @@ resource "aws_iam_role_policy" "lambda_policy_for_ses" {
 # call from eventBridge
 resource "aws_lambda_function" "sqs_sender" {
   function_name = "sqs_sender"
-  handler = "main"
-  runtime = "go1.x"
-  role = aws_iam_role.lambda_role_for_sqs.arn
-  filename = "lambda/sqs_sender.zip"
+  handler       = "main"
+  runtime       = "go1.x"
+  role          = aws_iam_role.lambda_role_for_sqs.arn
+  filename      = "lambda/sqs_sender.zip"
   environment {
     variables = {
       SQS_QUEUE_URL = aws_sqs_queue.queue.url
     }
-  }  
+  }
 }
 resource "aws_iam_role" "lambda_role_for_sqs" {
   name = "lambda_role_for_sqs"
+
   assume_role_policy = jsonencode({
     Version = "2012-10-17",
     Statement = [
       {
-        Action = "sts:AssumeRole"
+        Action = "sts:AssumeRole",
         Effect = "Allow",
         Principal = {
           Service = "lambda.amazonaws.com"
-        },
-      }
+        }
+      },
     ]
   })
-  
 }
 # LambdaのIAMポリシー
 resource "aws_iam_role_policy" "lambda_policy_for_sqs" {
