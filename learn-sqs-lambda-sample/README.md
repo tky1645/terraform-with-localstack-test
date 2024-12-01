@@ -29,7 +29,14 @@ aws --endpoint-url=http://localhost:4566 sqs create-queue --queue-name テスト
 
 # デプロイパッケージを作成
 GOOS=linux GOARCH=amd64 go build -o main
-zip -r ./.aws/lamda/sqs_sender.zip main
+zip -r sqs_sender.zip main
 
+
+ GOOS=linux GOARCH=amd64 go build -o bootstrap sqs_sender.go
+<!--.bashrcに設定した自作のコマンドを使う↓　windowsだとzipコマンドが簡単には使えないので -->
+zip bootstrap sqs_sender.zip
 ----
 terraform apply -auto-approve
+
+# todo
+https://qiita.com/Pampus/items/038004afb606952e7cd6

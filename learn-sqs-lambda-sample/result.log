@@ -1,1 +1,1 @@
-{"errorMessage":"RequestId: 61520b28-c364-1c5d-6fce-91a6c99b16ac Error: fork/exec /var/task/main: no such file or directory","errorType":"exitError"}
+{"errorMessage":"RequestId: e3c3380d-cce5-1585-fbf9-cde9e034f7db Error: Couldn't find valid bootstrap(s): [/var/task/bootstrap /opt/bootstrap]","errorType":"exitError"}

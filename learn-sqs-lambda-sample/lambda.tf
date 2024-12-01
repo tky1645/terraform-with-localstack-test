@@ -1,7 +1,7 @@
 # call from sqs
 resource "aws_lambda_function" "ses_email_sender" {
   function_name = "ses_email_sender"
-  handler       = "main"
+  handler       = "bootstrap"
   runtime       = "provided.al2"
   role          = aws_iam_role.lambda_role_for_ses.arn
   filename      = "lambda/ses_email_sender.zip"
@@ -11,6 +11,7 @@ resource "aws_lambda_function" "ses_email_sender" {
     }
   }
 }
+
 
 # sqsのキック対象のlambdaを指定
 resource "aws_lambda_event_source_mapping" "sqs_mapping" {
@@ -68,10 +69,11 @@ resource "aws_iam_role_policy" "lambda_policy_for_ses" {
 # call from eventBridge
 resource "aws_lambda_function" "sqs_sender" {
   function_name = "sqs_sender"
-  handler       = "main"
+  handler       = "bootstrap"
   runtime       = "provided.al2"
   role          = aws_iam_role.lambda_role_for_sqs.arn
   filename      = "lambda/sqs/sqs_sender.zip"
+  source_code_hash = filebase64sha256("lambda/sqs/sqs_sender.zip")
 
   environment {
     variables = {
