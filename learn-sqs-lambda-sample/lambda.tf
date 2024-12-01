@@ -71,7 +71,7 @@ resource "aws_lambda_function" "sqs_sender" {
   handler       = "main"
   runtime       = "provided.al2"
   role          = aws_iam_role.lambda_role_for_sqs.arn
-  filename      = "lambda/hoge/sqs/sqs_sender.zip"
+  filename      = "lambda/sqs/sqs_sender.zip"
 
   environment {
     variables = {
